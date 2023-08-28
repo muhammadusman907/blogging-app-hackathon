@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.profile-navbar{
+    height: 50px;
+    background-color: #7749f8;
+}
+.profile-main{
+    border: solid;
+    height: auto;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.profile-image{
+    width: 50%;
+    /* border: solid; */
+    margin-left: 10%;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.profile-image img{
+    border-radius: 10px;
+    width: 60%;
+    object-fit: contain;
+}
+.profile-email-password-upadate{
+    margin-left:10% ;
+display: flex;
+flex-direction:column ;
+}
+.profile-email-password-upadate input{
+    width: 300px;
+    margin-top: 10px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius:3px ;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: 1px 1px 1px 1px gray; */
+}
+.profile-email-password-upadate button{
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    background-color:#7749f8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
