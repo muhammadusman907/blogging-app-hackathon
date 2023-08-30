@@ -23,14 +23,16 @@ let allBlog = ()=>{
                         <div class="allblog-image-name-parent ">
                         
                         <div class="allblog-image mt-2"><img src="${change.doc.data().imageUrl}" alt=""> </div>
-                      <div class="allblog-user-name mt-4" ><h2 class="ps-2 fs-4">${change.doc.data().blogTittleValue}</h2>
+                      <div class="allblog-user-name mt-4 ps-3" >
+                      <h2 class=" fs-4">${change.doc.data().userName}</h2>
                         <span class="fs-6">${change.doc.data().userName}</span>
                         <span>12-12-2024</span>
                         </div>
                         </div>
-                        <div class="all-blog-value mt-2">
-                        <p class="ms-4 mt-3"> ${change.doc.data().blogValue}</p>
-                        <button class="btn btn-success" onclick="singleUser('${change.doc.data().currentuserid}')" id="single-select">user</button>
+                        <div class="all-blog-value ">
+                        <h2 class="fs-5">${change.doc.data().blogTittleValue}</h2>
+                        <p class=""> ${change.doc.data().blogValue}</p>
+                        <button class="user-btn pb-4" onclick="singleUser('${change.doc.data().currentuserid}')" id="single-select">see all this user</button>
                         </div>
                         </div>
                         `

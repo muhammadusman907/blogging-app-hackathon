@@ -2,7 +2,7 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics.js";
   import { signOut, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
-  import { getFirestore, collection , addDoc,setDoc,doc, updateDoc,onSnapshot,arrayUnion,query,where,arrayRemove } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
+  import { getFirestore, collection , addDoc,setDoc,doc, updateDoc,onSnapshot,arrayUnion,query,where,arrayRemove, deleteDoc } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
   import { getStorage, ref ,uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-storage.js";
   const firebaseConfig = {
     apiKey: "AIzaSyDpB5MTujqbaxH2T95ULOwKrkhGndzfUe0",
@@ -15,7 +15,7 @@
   };
 
   export {signOut, getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword,onAuthStateChanged, 
-    getFirestore,collection, addDoc ,doc, updateDoc ,setDoc,query,where,
+    getFirestore,collection, addDoc ,doc, updateDoc ,setDoc,query,where, deleteDoc,
     getStorage, ref ,uploadBytesResumable, getDownloadURL,onSnapshot,arrayUnion,arrayRemove, initializeApp
  }
  

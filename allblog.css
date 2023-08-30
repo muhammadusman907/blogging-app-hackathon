@@ -1,7 +1,7 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0 !important ;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
 /* BODY START */
@@ -20,7 +20,15 @@ body::-webkit-scrollbar-thumb{
  background-color: grey !important;
  border-radius: 10px;
 }
-
+.nav-font{
+    font-size:20px ;
+}
+.font-size-main{
+    font-size: 23px;
+}
+.user-font{
+    font-size: 20px;
+}
 .navbar-login {
     display: flex;
     justify-content: space-around;
@@ -48,13 +56,34 @@ body::-webkit-scrollbar-thumb{
 }
 
 /* ALL BLOG  */
-
 .all-blog-main{
+   
+     margin-left: 12% !important;
+     margin-top: 15px !important;
     /* border: solid; */
-    height: 280px;
-    width: 70%;
+    height: auto;
+    width: 60%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
+    background-color: #fff !important;
+}
+@media screen and (max-width:750px) {
+       /* body{
+        background-color: #7749f8 !important;
+       } */
+     .all-blog-main{
+        width: 80%;
+        margin-left: 7% !important;
+     }
+     .nav-font{
+        font-size:13px ;
+    }
+    .font-size-main{
+        font-size: 15px;
+    }
+    .user-font{
+        font-size: 15px;
+    }
 }
 .allblog-image-name-parent{
     display: flex;
@@ -62,29 +91,38 @@ body::-webkit-scrollbar-thumb{
 }
 .allblog-image {
     /* border: solid; */
-    width: 12%;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     border-radius: 10px;
-    margin-left: 3%;
-    margin-right: 3%;
-
-
+    margin-left: 3% !important;
 }
 .allblog-image img{
     /* object-fit: contain; */
-    width: 99%;
-    height: 70px;
+    width: 65px;
+    height: 64px;
     border-radius: 10px;
     margin: 0 auto;
+    object-fit: cover;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .all-blog-value{
     /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+    min-height:150px ;
     /* border: solid; */
-    height: 200px;
+    height: auto;
+    word-wrap: break-word;
+    padding-top: 10px !important;
+    width: 96%;
+    margin: auto !important;
 }
 
-
+.user-btn{
+    margin-top: 15px !important;
+    color: #7749f8;
+    border:none;
+    outline: none; 
+    background-color: transparent;
+}
 
 
 

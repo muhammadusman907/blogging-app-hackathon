@@ -11,17 +11,29 @@ let profileImageBtn = document.getElementById("profile-image-btn");
 let profileName = document.getElementById("profile-name")
  let profileImage = document.getElementById("profile-image");
  let iconBtn = document.getElementById("icon-btn");
+ let navProfileName = document.getElementById ("nav-profile-name");
+ let logoutBtn = document.getElementById ("logout-btn");
+
+ let logout = () => {
+  signOut(auth).then(() => {
+      localStorage.clear()
+      location.href = "./signup.html"
+  }).catch((error) => {
+      console.log("error")
+  });
+}
+logoutBtn.addEventListener("click",logout)
  let iconBtns = ()=>{
     profileFileImage.click();
  }
  iconBtn.addEventListener("click",iconBtns)
   let imageupdate = ()=>{
 const unsub = onSnapshot(doc(db, "users", localStorage.getItem("usersId")), (doc) => {
-   profileName.innerHTML = doc.data().signup_name_value
+   profileName.innerHTML = doc.data().signup_name_value;
     profileImage.src = doc.data().photoUrl;
+   navProfileName.innerHTML = doc.data().signup_name_value; 
     console.log("Current data: ", doc.data());
   
-
 });
 
   };

@@ -18,20 +18,20 @@ const singleUsergetData = ()=>{
     const unsubscribe = onSnapshot(q, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
             userProfilePhoto.src = change.doc.data().imageUrl;
-            userProfileEmail.innerHTML = change.doc.data().userName;
-            userProfileName.innerHTML = change.doc.data().userEmail;
+            userProfileEmail.innerHTML = change.doc.data().userEmail;
+            userProfileName.innerHTML = change.doc.data().userName;
             singleUserList.innerHTML +=`
             <div class="all-blog-main " >
             <div class="allblog-image-name-parent">
             <div class="allblog-image mt-2 ms-2"><img src="${change.doc.data().imageUrl}" alt=""> </div>
             <div class="allblog-user-name mt-3" ><h2 class="ps-2 fs-5">${change.doc.data().userName}</h2>
             <span class="ps-2 fs-6">${change.doc.data().userName}</span>
-            <span>12-12-2024</span>
+            <span class="text-secondary">12-12-2024</span>
             </div>
             </div>
             <div class="all-blog-value mt-2">
             <div class="allblog-user-name mt-4" ><h2 class="fs-4 ps-3 pe-2">${change.doc.data().blogTittleValue}</h2>
-            <p class="pt-3 ps-3 pe-2"> ${change.doc.data().blogValue}</p>
+            <p class="pt-3 ps-3 pe-2 text-secondary"> ${change.doc.data().blogValue}</p>
             </div>
             </div>
            

@@ -1,4 +1,4 @@
-import { signOut, getAuth, onAuthStateChanged, initializeApp, getFirestore, collection, addDoc, updateDoc, onSnapshot, setDoc, arrayUnion, arrayRemove, query, where,doc } from "./firebase.js"
+import { signOut, deleteDoc, getAuth, onAuthStateChanged, initializeApp, getFirestore, collection, addDoc, updateDoc, onSnapshot, setDoc, arrayUnion, arrayRemove, query, where,doc } from "./firebase.js"
 export { blogFunc }
 const db = getFirestore();
 const auth = getAuth();
@@ -8,6 +8,14 @@ let blogTittle = document.getElementById("blog-tittle")
 let blogBtn = document.getElementById("blog-btn");
 let blogList = document.getElementById("blog-list")
 let logoutBtn = document.getElementById("logout-btn");
+let dashBoardNavName = document.getElementById("dashb-nav-name");
+let dashboardEdit = document.getElementById("dashboard-show");
+let blogBtnCancel = document.getElementById("blog-btn-cancel");
+let updateBtnBlog = document.getElementById ("blog-update-btn")
+let updateBlogInput = document.getElementById ("update-blog")
+let updateBlogTittleInput = document.getElementById ("update-blog-tittle")
+// console.log(updateBlogInput)
+// console.log(updateBlogTittleInput)
 let logout = () => {
     signOut(auth).then(() => {
         localStorage.clear()
@@ -85,79 +93,103 @@ var blogFunc = async (value) => {
     });
 }
 blogBtn && blogBtn.addEventListener("click", blogFunc);
-
-
-
-if (location.pathname == "/index.html") {
-    let blogGetData = () => {
+if (location.pathname === "/index.html"){
+    var blogGetData = () => {
         //)
         const q = query(collection(db, "blogs"), where("currentuserid", "==", localStorage.getItem("usersId")));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             snapshot.docChanges().forEach((change) => {
-
+                console.log(change)
+                   if(change.type === "modified") {
+                       blogGetData()
+                       blogList.innerHTML = "";
+                }
+                if(change.type === "removed") {
+                    blogList.innerHTML = "";
+                    blogGetData()
+             }
                 console.log(change.doc.data())
-
-                blogList.innerHTML += `
-         <div>
-         <div class="blog-show">
+dashBoardNavName.innerHTML = change.doc.data().userName;
+        
+        blogList.innerHTML += `
+         
+            <div class="blog-show">
 
              <div class="pic-tittle ">
-                 <input style="display:none;" type="text">
-                 <div class="blog-profile-pic mt-2 ms-3">
-                     <img id="blog-page-image" src="${change.doc.data().imageUrl}" alt="">
-                 </div>
-                 <div>
-                     <div class="name-tittle ps-2">
-                         <h3 id="show-blog-tittle">${change.doc.data().blogTittleValue}</h3>
-                         <span id="show-name">${change.doc.data().userName}</span>
-                         <span>12-2-2024</span>
-                         <div>
-                         </div>
-                     </div>
-                 </div>
+             <div class="blog-profile-pic mt-2 ms-3">
+             <img id="blog-page-image" src="${change.doc.data().imageUrl}" alt="">
              </div>
-                 <div class="blog-value-btn mt-5">
-                     <p id="show-blog">${change.doc.data().blogValue}</p>
-                     <button class="btn btn-success" onclick="editBlog(this)">Edit</button>
-                     <button class="btn btn-success" onclick="deleteBlog(this)">Delete</button>
-                     <button class="btn btn-success" onclick="updateBlog(this)">Update</button>
+             <div>
+             <div class="name-tittle ms-3">
+             <h3 id="show-blog-tittle" class="pt-3">${change.doc.data().userName}</h3>
+             <span id="show-name">${change.doc.data().userName}</span>
+             <span>12-2-2024</span>
+             <div>
+             </div>
+             </div>
+             </div>
+             </div>
+             <div class="blog-value-btn ms-3 me-4 mb-1">
+              <input style="display:none;" type="text"  placeholder="Whats on your Mind">
+             <h3 id="show-blog-tittle" class="fs-4">${change.doc.data().blogTittleValue}</h3>
+                     <p id="show-blog" class="mb-3">${change.doc.data().blogValue}</p>
+                     <button class="update-delete" onclick="editBlog(this,'${change.doc.data().blogeid}')">Edit</button>
+                     <button class="update-delete" onclick="deleteBlog(this,'${change.doc.data().blogeid}')">Delete</button>
+                     <button class="update-delete invisible" onclick="updateBlog(this,'${change.doc.data().blogeid}')">Update</button>
                  </div>
+                 </div>  
          `
             });
         });
     }
-    blogGetData();
-}
-
-
-let deleteBlog = (e) => {
-
-
-    console.log(e)
-}
-let editBlog = async (e) => {
-    e.parentNode.parentNode.childNodes[1].childNodes[1].style.display = "block";
-    console.log(e.parentNode.parentNode.childNodes[1].childNodes[1])
-
-}
-let updateBlog = async (e) => {
-
-
-    e.parentNode.parentNode.childNodes[1].childNodes[1].style.display = "none";
-    let blog = e.parentNode.parentNode.childNodes[1].childNodes[1];
-    console.log(blog.value)
-    // console.log()
-    const washingtonRef = doc(db, "users", localStorage.getItem("usersId"));
-    await updateDoc(washingtonRef, {
-
+    window.addEventListener('load', (event) =>{
+        // blogGetData()
     });
-
-    //   Atomically remove a region from the "regions" array field.
-
-    // console.log(e)
 }
 
+
+let deleteBlog = async(e,deleteId) => {
+
+    await deleteDoc(doc(db, "blogs", deleteId));
+    console.log(deleteId)
+}
+let editBlog = async (e,editId) => {
+    localStorage.setItem("editId",editId)
+    dashboardEdit.style.display = "block" ;
+    dashboardEdit.style.position = "fixed" ;
+    dashboardEdit.style.left = "30%" ;
+    dashboardEdit.style.bottom = "30%" ;
+    // console.log(e.parentNode.parentNode.childNodes[3].childNodes[1])
+    // e.parentNode.parentNode.childNodes[3].childNodes[1].style.display = "block";
+
+}
+let closeModal = ( ) =>{
+    dashboardEdit.style.display = "none" ;
+}
+blogBtnCancel.addEventListener("click",closeModal)
+
+// e.parentNode.parentNode.childNodes[1].childNodes[1].style.display = "none";
+// let blog = e.parentNode.parentNode.childNodes[1].childNodes[1];
+let updateBlog = async (e,updateId) => {
+   console.log(updateId)
+
+   console.log("my func")
+  let editId =  localStorage.getItem ("editId");
+ console.log(updateBlogInput.value) 
+ console.log(updateBlogTittleInput.value) 
+//   console.log(blog.value)
+  const washingtonRef = doc(db, "blogs", editId);
+
+  await updateDoc(washingtonRef, {
+      blogValue : updateBlogInput.value,
+      blogTittleValue : updateBlogTittleInput.value
+    });
+    dashboardEdit.style.display = "none" ;
+    
+   blogGetData()
+}
+updateBtnBlog.addEventListener("click",updateBlog)
 
 window.deleteBlog = deleteBlog;
 window.editBlog = editBlog;
-window.updateBlog = updateBlog;
+// window.updateBlog = updateBlog;

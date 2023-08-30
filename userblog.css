@@ -41,16 +41,19 @@ body::-webkit-scrollbar-thumb{
 .main-user{
     display: flex;
     justify-content: space-evenly;
+    /* flex-wrap: wrap-reverse; */
     width: 100% !important;
 
 }
+
 .blog-single-user{
-    width: 47%;
+    width:50%;
 }
 .all-blog-main{
     background-color: #fff;
     margin-top: 10px !important;
     height: auto;
+    
     width: 98%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 10px;
@@ -60,15 +63,15 @@ body::-webkit-scrollbar-thumb{
     margin-top: 10px;
 }
 .allblog-image {
-    width: 10%;
-    height: 60px;
+    width: 65px;
+    height: 65px;
     border-radius: 10px;
     margin-left: 3%;
     margin-right: 3%;
 }
 .allblog-image img{
-    width: 99%;
-    height: 59px;
+    width: 64px;
+    height: 64px;
     object-fit: cover;
     border-radius: 10px;
     margin: 0 auto;
@@ -81,12 +84,27 @@ body::-webkit-scrollbar-thumb{
 
 .profile-image-name{
 width: 15%;  
-height: 260px;  
-border: solid;
+height: 200px;  
+/* border: solid; */
 
 }
 .profile-image img{
     width: 100%;
     height: 200px;
     object-fit: cover;
+box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+.user-name{
+    color: #7749f8;
+}
+.profile-name-email{
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    margin-bottom: 10px !important;
+
+}
+.profile-name-email h1{
+     font-size: 5rem;
 }
