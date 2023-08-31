@@ -125,7 +125,7 @@ body::-webkit-scrollbar-thumb{
 display: flex;
 flex-direction:column ;
 /* border: solid; */
-margin-top: 20px !important;
+margin-top: 10px !important;
 }
 .profile-email-password-upadate input{
     width: 300px;

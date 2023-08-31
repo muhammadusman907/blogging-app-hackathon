@@ -78,10 +78,11 @@ var blogFunc = async (value) => {
             await updateDoc(washingtonRef, {
                 blogeid: docRef.id
             });
+    blog.value = "";
+    blogTittle.value = "";
         }
     });
-    // blog.value = "";
-    // blogTittle.value = "";
+   
     blogGetData()
 }
 blogBtn && blogBtn.addEventListener("click", blogFunc);
@@ -174,14 +175,15 @@ if (location.pathname === "/index.html"){
         //     });
         // });
     }
+    blogGetData()
 }
-blogGetData()
     
 
 let deleteBlog = async(e,deleteId) => {
 
     await deleteDoc(doc(db, "blogs", deleteId));
     console.log(deleteId)
+    blogGetData()
 }
 let editBlog = async (e,editId) => {
     localStorage.setItem("editId",editId)
@@ -196,7 +198,7 @@ let editBlog = async (e,editId) => {
 let closeModal = ( ) =>{
     dashboardEdit.style.display = "none" ;
 }
-blogBtnCancel.addEventListener("click",closeModal)
+blogBtnCancel && blogBtnCancel.addEventListener("click",closeModal)
 
 // e.parentNode.parentNode.childNodes[1].childNodes[1].style.display = "none";
 // let blog = e.parentNode.parentNode.childNodes[1].childNodes[1];
@@ -218,7 +220,7 @@ let updateBlog = async (e,updateId) => {
     
    blogGetData()
 }
-updateBtnBlog.addEventListener("click",updateBlog)
+updateBtnBlog && updateBtnBlog.addEventListener("click",updateBlog)
 
 window.deleteBlog = deleteBlog;
 window.editBlog = editBlog;
