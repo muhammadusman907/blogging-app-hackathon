@@ -1,4 +1,4 @@
-import { signOut, deleteDoc, getAuth, onAuthStateChanged, initializeApp, getFirestore, collection, addDoc, updateDoc, onSnapshot, setDoc, arrayUnion, arrayRemove, query, where,doc } from "./firebase.js"
+import { signOut, deleteDoc, getAuth, onAuthStateChanged, initializeApp, getFirestore, collection, addDoc, updateDoc, onSnapshot, setDoc, arrayUnion, arrayRemove, query, where,doc ,getDocs} from "./firebase.js"
 export { blogFunc }
 const db = getFirestore();
 const auth = getAuth();
@@ -45,8 +45,6 @@ if (location.pathname == "/index.html") {
 var blogFunc = async (value) => {
     const unsub = onSnapshot(doc(db, "users", localStorage.getItem("usersId")), async (docs) => {
         console.log("Current data: ", docs.data());
-
-        // blogFunc(doc.data())
         console.log(value)
         if (blog.value.trim() === "") {
             alert(" 2 input khali")
@@ -65,13 +63,9 @@ var blogFunc = async (value) => {
                 userName: docs.data().signup_name_value,
                 currentuserid: docs.data().userId,
                 userEmail:docs.data().signup_email_value
-                // usreid: d
-
-                // photourl:e
+        
             }
-            // update doc function
-
-            // Add a new document with a generated id.
+        
             const docRef = await addDoc(collection(db, "blogs"), {
                 ...userUpadadeData,
 
@@ -84,69 +78,105 @@ var blogFunc = async (value) => {
             await updateDoc(washingtonRef, {
                 blogeid: docRef.id
             });
-// Add a new document in collection "cities"
-// await setDoc(doc(db, "users", localStorage.getItem("usersId")), {
-//    ...userUpadadeData,
-   
-//   });
         }
     });
+    // blog.value = "";
+    // blogTittle.value = "";
+    blogGetData()
 }
 blogBtn && blogBtn.addEventListener("click", blogFunc);
 if (location.pathname === "/index.html"){
-    var blogGetData = () => {
-        //)
+    var blogGetData = async() => {
+        blogList.innerHTML = "";
         const q = query(collection(db, "blogs"), where("currentuserid", "==", localStorage.getItem("usersId")));
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            snapshot.docChanges().forEach((change) => {
-                console.log(change)
-                   if(change.type === "modified") {
-                       blogGetData()
-                       blogList.innerHTML = "";
-                }
-                if(change.type === "removed") {
-                    blogList.innerHTML = "";
-                    blogGetData()
-             }
-                console.log(change.doc.data())
-dashBoardNavName.innerHTML = change.doc.data().userName;
-        
-        blogList.innerHTML += `
-         
-            <div class="blog-show">
-
-             <div class="pic-tittle ">
-             <div class="blog-profile-pic mt-2 ms-3">
-             <img id="blog-page-image" src="${change.doc.data().imageUrl}" alt="">
-             </div>
-             <div>
-             <div class="name-tittle ms-3">
-             <h3 id="show-blog-tittle" class="pt-3">${change.doc.data().userName}</h3>
-             <span id="show-name">${change.doc.data().userName}</span>
-             <span>12-2-2024</span>
-             <div>
-             </div>
-             </div>
-             </div>
-             </div>
-             <div class="blog-value-btn ms-3 me-4 mb-1">
-              <input style="display:none;" type="text"  placeholder="Whats on your Mind">
-             <h3 id="show-blog-tittle" class="fs-4">${change.doc.data().blogTittleValue}</h3>
-                     <p id="show-blog" class="mb-3">${change.doc.data().blogValue}</p>
-                     <button class="update-delete" onclick="editBlog(this,'${change.doc.data().blogeid}')">Edit</button>
-                     <button class="update-delete" onclick="deleteBlog(this,'${change.doc.data().blogeid}')">Delete</button>
-                     <button class="update-delete invisible" onclick="updateBlog(this,'${change.doc.data().blogeid}')">Update</button>
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+            console.log(doc.id, " => ", doc.data());
+            dashBoardNavName.innerHTML = doc.data().userName;
+                        blogList.innerHTML += `
+                        
+                        <div class="blog-show">
+                        
+                        <div class="pic-tittle ">
+                        <div class="blog-profile-pic mt-2 ms-3">
+                        <img id="blog-page-image" src="${doc.data().imageUrl}" alt="">
+                        </div>
+                        <div>
+                        <div class="name-tittle ms-3">
+                        <h3 id="show-blog-tittle" class="pt-3">${doc.data().userName}</h3>
+                 <span id="show-name">${doc.data().userName}</span>
+                 <span>12-2-2024</span>
+                 <div>
+                 </div>
+                 </div>
+                 </div>
+                 </div>
+                 <div class="blog-value-btn ms-3 me-4 mb-1">
+                 <input style="display:none;" type="text"  placeholder="Whats on your Mind">
+                 <h3 id="show-blog-tittle" class="fs-4">${doc.data().blogTittleValue}</h3>
+                 <p id="show-blog" class="mb-3">${doc.data().blogValue}</p>
+                 <button class="update-delete" onclick="editBlog(this,'${doc.data().blogeid}')">Edit</button>
+                 <button class="update-delete" onclick="deleteBlog(this,'${doc.data().blogeid}')">Delete</button>
+                 <button class="update-delete invisible" onclick="updateBlog(this,'${doc.data().blogeid}')">Update</button>
                  </div>
                  </div>  
-         `
-            });
+                 `
         });
-    }
-    window.addEventListener('load', (event) =>{
-        // blogGetData()
-    });
-}
+        console.log("hello")
 
+        //)
+        // const q = query(collection(db, "blogs"), where("currentuserid", "==", localStorage.getItem("usersId")));
+        // const unsubscribe = onSnapshot(q, (snapshot) => {
+        //     snapshot.docChanges().forEach((change) => {
+        //         console.log(change)
+        //            if(change.type === "modified") {
+        //                blogList.innerHTML = "";
+        //                blogGetData()
+        //         }
+        //    else if(change.type === "removed") {
+        //             blogList.innerHTML = "";
+        //             blogGetData()
+        //      }
+             
+        //      else{console.log(change.doc.data())
+                
+        //         dashBoardNavName.innerHTML = change.doc.data().userName;
+                
+        //             blogList.innerHTML += `
+                    
+        //             <div class="blog-show">
+                    
+        //             <div class="pic-tittle ">
+        //             <div class="blog-profile-pic mt-2 ms-3">
+        //             <img id="blog-page-image" src="${change.doc.data().imageUrl}" alt="">
+        //             </div>
+        //             <div>
+        //             <div class="name-tittle ms-3">
+        //             <h3 id="show-blog-tittle" class="pt-3">${change.doc.data().userName}</h3>
+        //      <span id="show-name">${change.doc.data().userName}</span>
+        //      <span>12-2-2024</span>
+        //      <div>
+        //      </div>
+        //      </div>
+        //      </div>
+        //      </div>
+        //      <div class="blog-value-btn ms-3 me-4 mb-1">
+        //      <input style="display:none;" type="text"  placeholder="Whats on your Mind">
+        //      <h3 id="show-blog-tittle" class="fs-4">${change.doc.data().blogTittleValue}</h3>
+        //      <p id="show-blog" class="mb-3">${change.doc.data().blogValue}</p>
+        //      <button class="update-delete" onclick="editBlog(this,'${change.doc.data().blogeid}')">Edit</button>
+        //      <button class="update-delete" onclick="deleteBlog(this,'${change.doc.data().blogeid}')">Delete</button>
+        //      <button class="update-delete invisible" onclick="updateBlog(this,'${change.doc.data().blogeid}')">Update</button>
+        //      </div>
+        //      </div>  
+        //      `
+        //     } 
+        //     });
+        // });
+    }
+}
+blogGetData()
+    
 
 let deleteBlog = async(e,deleteId) => {
 
