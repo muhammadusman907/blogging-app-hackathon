@@ -1,9 +1,9 @@
 
 import {
   getStorage, ref, uploadBytesResumable, getDownloadURL,
-  getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, arrayUnion, getAuth
+  getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, arrayUnion, getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword
 } from "./firebase.js"
-  const auth = getAuth();
+const auth = getAuth();
 import { blogFunc } from "./app.js";
 const storage = getStorage();
 const db = getFirestore();
@@ -16,19 +16,49 @@ let navProfileName = document.getElementById("nav-profile-name");
 let logoutBtn = document.getElementById("logout-btn");
 let updatePasswordBtn = document.getElementById("update-password-btn");
 let updateEmail = document.getElementById("update-email");
-
-let userUpdatePassword = ()=>{
-  const user = auth.currentUser;
-  updateEmail.innerHTML = user.email ;
-  console.log("current user" , user)
-  
-  let oldPassword = document.getElementById("old-password");
-  let newPassword = document.getElementById("new-password");
-  console.log(updateEmail.value)   
-  console.log(oldPassword.value)   
-  console.log(newPassword.value)   
+let oldPassword = document.getElementById("old-password");
+let newPassword = document.getElementById("new-password");
+console.log(updateEmail.value)
+console.log(oldPassword.value)
+console.log(newPassword.value)
+let callUpdatePassword = async() => {
+  try{
+    const data = await userUpdatePassword()
+    console.log(data)
+    alert("update sucscessfully")
+  }
+  catch (error){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Something went wrong!',
+      footer: '<a href="">Why do I have this issue?</a>'
+    })
+  }
 }
-updatePasswordBtn.addEventListener("click",userUpdatePassword)
+
+let userUpdatePassword = () => {
+  return new Promise((resolve, reject) => {
+    const user = auth.currentUser;
+    console.log("current user", user)
+    const credential = EmailAuthProvider.credential(updateEmail.value, oldPassword.value)
+    reauthenticateWithCredential(user, credential).then((res) => {
+      resolve(res)
+      console.log("userauth finished", res)
+      updatePassword(user, newPassword.value).then((res) => {
+        resolve(res)
+        // console.log(res)
+      }).catch((error) => {
+        reject(error)
+        // console.log("update password", error)
+      });
+    }).catch((error) => {
+      reject(error)
+      // console.log("error", error.massage)
+    });
+  })
+}
+updatePasswordBtn.addEventListener("click", callUpdatePassword)
 
 let logout = () => {
   signOut(auth).then(() => {
@@ -48,7 +78,7 @@ let imageupdate = () => {
     profileName.innerHTML = doc.data().signup_name_value;
     profileImage.src = doc.data().photoUrl;
     navProfileName.innerHTML = doc.data().signup_name_value;
-    updateEmail.innerHTML = doc.data().signup_email_value;
+    updateEmail.value = doc.data().signup_email_value;
     console.log("Current data: ", doc.data());
 
   });

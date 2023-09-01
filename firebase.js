@@ -1,7 +1,7 @@
 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-analytics.js";
-  import { signOut, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
+  import { signOut, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword ,onAuthStateChanged , reauthenticateWithCredential,EmailAuthProvider, updatePassword } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js";
   import { getFirestore, collection , addDoc,setDoc,doc, updateDoc,onSnapshot,arrayUnion,query,where,arrayRemove, deleteDoc,getDocs } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-firestore.js";
   import { getStorage, ref ,uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.2.0/firebase-storage.js";
   const firebaseConfig = {
@@ -14,7 +14,7 @@
     measurementId: "G-5F4DMJG4X2"
   };
 
-  export {signOut, getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword,onAuthStateChanged, 
+  export {signOut, getAuth, createUserWithEmailAndPassword ,signInWithEmailAndPassword,onAuthStateChanged,  reauthenticateWithCredential ,EmailAuthProvider, updatePassword,
     getFirestore,collection, addDoc ,doc, updateDoc ,setDoc,query,where, deleteDoc,getDocs,
     getStorage, ref ,uploadBytesResumable, getDownloadURL,onSnapshot,arrayUnion,arrayRemove, initializeApp
  }
