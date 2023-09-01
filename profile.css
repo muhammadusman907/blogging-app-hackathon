@@ -1,24 +1,12 @@
-/* *{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-.profile-navbar{
-    height: 50px;
-    background-color: #7749f8;
-}
- */
-/* HEADER */
 * {
-    margin: 0 !important ;
-    padding: 0 !important;
     box-sizing: border-box !important;
 }
 
 /* BODY START */
 body {
     background-color: #f8f9fa !important;
+    height: 100vh;
     overflow-y: scroll;
 }
 body::-webkit-scrollbar{
@@ -31,6 +19,17 @@ body::-webkit-scrollbar-thumb{
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3 );
  background-color: grey !important;
  border-radius: 10px;
+}
+.swal-back{
+    margin: 10px !important;
+    padding: auto !important ;
+}
+.swal-back i{
+    margin:auto  !important;
+    padding: auto !important ;
+}
+.swal-back button{
+    padding: 15px !important;
 }
 .nav-font{
     font-size:20px ;
@@ -68,10 +67,11 @@ body::-webkit-scrollbar-thumb{
 }
 /* PROFILE MAIN */
 .profile-main{
-    /* border: solid; */
+    border: solid;
     height: auto;
     width: 60%;
-    margin: 0 auto !important;
+    margin:  auto !important;
+    padding: auto !important;
     margin-top: 15px;
     background-color: #fff !important;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -80,6 +80,7 @@ body::-webkit-scrollbar-thumb{
 .profile-main-child{
     width: 80%;
     margin: auto !important;
+    padding: auto !important;
     padding-top: 12px !important;
     padding-bottom: 12px !important;
     height: auto;
@@ -89,20 +90,20 @@ body::-webkit-scrollbar-thumb{
     width: 40%;
     /* border: solid; */
     margin-left: 10%;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 10px;
-    height: 280px;
+    height: 250px;
 }
 .profile-image img{
     border-radius: 10px;
     width: 100%;
-    height: 220px;
+    height: 245px;
     object-fit:cover;
 }
 .profile-image i{
     position: absolute;
-    top: 42%;
-    left:41%;
+    top: 52%;
+    left:46%;
     color: #7749f8;
     cursor: pointer;
      font-size: 30px;
@@ -112,13 +113,13 @@ body::-webkit-scrollbar-thumb{
     margin-left: 4% !important;
 }
 .profile-pic-btn{
-    margin-top: 30px !important;
     background-color: #7749f8;
     border-radius: 5px;
     border:none ;
     color: #fff;
     width: 180px;
     height: 30px;
+    margin-left: 10%;
 }
 .profile-email-password-upadate{
     margin-left:10% ;
@@ -128,8 +129,8 @@ flex-direction:column ;
 margin-top: 10px !important;
 }
 .profile-email-password-upadate input{
-    width: 300px;
-    margin-top: 10px !important;
+    width: 60%;
+    margin-top: 8px !important;
     height: 30px;
     outline: none;
     border: none;

@@ -4,7 +4,6 @@ import {
   getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, arrayUnion, getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword
 } from "./firebase.js"
 const auth = getAuth();
-import { blogFunc } from "./app.js";
 const storage = getStorage();
 const db = getFirestore();
 let profileFileImage = document.getElementById("profile-image-file");
@@ -18,23 +17,41 @@ let updatePasswordBtn = document.getElementById("update-password-btn");
 let updateEmail = document.getElementById("update-email");
 let oldPassword = document.getElementById("old-password");
 let newPassword = document.getElementById("new-password");
-console.log(updateEmail.value)
-console.log(oldPassword.value)
-console.log(newPassword.value)
+
 let callUpdatePassword = async() => {
-  try{
-    const data = await userUpdatePassword()
-    console.log(data)
-    alert("update sucscessfully")
-  }
-  catch (error){
+  if (oldPassword.value.trim() == "" ){
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Something went wrong!',
-      footer: '<a href="">Why do I have this issue?</a>'
+      text: "required old password",
     })
   }
+    else if(newPassword.value.trim() == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: "Required new password",
+      })
+    }
+    else{
+  try{
+    const data = await userUpdatePassword()
+    console.log(data) 
+       Swal.fire({
+      icon: 'success',
+      title: 'Oops...',
+      text : "update sucscessfully",
+    
+    })
+  }
+  catch (error){
+    console.log(error)
+    Swal.fire({
+      icon: 'success',
+      title: 'Oops...',
+      text: error,
+    })
+  }}
 }
 
 let userUpdatePassword = () => {
@@ -89,7 +106,7 @@ imageupdate()
 let profileUpdateImage = () => {
   console.log("hee")
   console.log(profileFileImage.files[0].name)
-  updateProfile(profileFileImage.files[0])
+  updateProfile(URL.createObjectURL(profileFileImage.files[0]))
     .then(async (res) => {
       console.log(res)
       const washingtonRef = doc(db, "users", localStorage.getItem("usersId"));

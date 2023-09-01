@@ -6,68 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat app</title>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="./profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-
-    <script type="module" src="app.js" defer></script>
+    
 </head>
 
 <body>
-    <!-- <header>
-        <nav>
-         <div class="profile-navbar">
-           <div class="d-flex justify-content-between"> <h3 class="fs-3 ">Personal Blogging App</h3>
-            <a class="text-light " href="./index.html">dash board</a>
+    <nav>
+        <div class="navbar-login ">
+            <div>
+                <h1 class="text-light nav-font">Personal Blogging App</h1>
+            </div>
+            <div></div>
+            <div class="d-flex">
+                <a class="text-decoration-none" href="./index.html" id="nav-profile-name">my name</a>
+                <button class="logout-btn ms-2" id="logout-btn">Logout</button>
+            </div>
         </div>
-         </div>
-
-        </nav>
-    </header> -->
-<!-- HEADER -->
-<nav>
-    <div class="navbar-login ">
-        <div>
-            <h1 class="text-light nav-font">Personal Blogging App</h1>
+        <div class="login-main-heading">
+            <div>
+                <h1 class="ps-3 font-size-main">Good morning users !</h1>
+            </div>
+            <div class="invisible">coming soon</div>
+            <div class="invisible">coming soon</div>
         </div>
-        <div></div>
-        <div class="d-flex">
-            <a class="text-decoration-none" href="./index.html" id="nav-profile-name">my name</a>
-            <button class="logout-btn ms-2" id="logout-btn">Logout</button>
-        </div>
-    </div>
-    <div class="login-main-heading">
-        <div><h1 class="ps-3 font-size-main">Good morning users !</h1></div>
-        <div class="invisible">coming soon</div>
-        <div class="invisible">coming soon</div>
-    </div>
-</nav>
+    </nav>
 
 
     <div class="profile-main">
         <div class="profile-main-child">
-        <div class="profile-image"><img id="profile-image" src="images/mypic.jpeg" alt="">
-            <label for=""></label>
-                  <i class="fa-solid fa-pen" id="icon-btn"></i>
-            <input style="display: none;" type="file" id="profile-image-file">
-            <h3 class="profile-name" id="profile-name">Muhammad usman</h3>
-        </div>
-        <button class="profile-pic-btn" id="profile-image-btn">update image</button>
+            <div class="profile-image"><img id="profile-image" src="images/mypic.jpeg" alt="">
+                <label for=""></label>
+                <i class="fa-solid fa-pen" id="icon-btn"></i>
+                <input style="display: none;" type="file" id="profile-image-file">
+            </div>
+            
+            <h3 style="margin-left: 10% !important;" class="profile-name" id="profile-name">Muhammad usman</h3>
+           
+            <button class="profile-pic-btn" id="profile-image-btn">update image</button>
 
-        <div class="profile-email-password-upadate">
-            <input disabled  id="update-email" class="form-control" type="text" placeholder="Enter email">
-            <p id="update-email"  ></p>
-            <input id="old-password" class="form-control" type="text" placeholder="Enter old password">
-            <input id="new-password" class="form-control" type="text" placeholder="Enter new password">
-            <button id="update-password-btn" class="update-password">update Password</button>
+            <div class="profile-email-password-upadate">
+                <input  id="update-email" class="form-control" type="text" placeholder="Enter email">
+                <input id="old-password" class="form-control" type="text" placeholder="Enter old password">
+                <input id="new-password" class="form-control" type="text" placeholder="Enter new password">
+                <button id="update-password-btn" class="update-password">update Password</button>
+            </div>
         </div>
-    </div>
     </div>
     <ul id="user-list"></ul>
     <!-- <button style="width: 200px; height: 50px;">Logout</button> -->
-    <!-- <button id="check-btn">click</button> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    <!-- <button id="check-btn">click</button>-->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -75,10 +70,11 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
         integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script> 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
-        <script type="module" src="profile.js"></script>
+    <script type="module" src="profile.js"></script>
 </body>
 
 </html>
