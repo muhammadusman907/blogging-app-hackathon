@@ -113,7 +113,7 @@ if (location.pathname === "/index.html"){
                         <div class="name-tittle ms-3">
                         <h3 id="show-blog-tittle" class="pt-3">${doc.data().userName}</h3>
                  <span id="show-name">${doc.data().userName}</span>
-                 <span>${new Date(doc.data().dates.nanoseconds) }</span>
+                 <span>${doc.data().dates.toDate().toDateString() }</span>
                  <div>
                  </div>
                  </div>
