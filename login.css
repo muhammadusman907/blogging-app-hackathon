@@ -1,31 +1,78 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
-
+/* -------------------------------------------------------------- */
+/* ----------------------- BODY START ----------------------------*/
+/* -------------------------------------------------------------- */
 body {
     background-color: #f8f9fa !important;
+    overflow-y: scroll;
+}
+body::-webkit-scrollbar{
+    width: 15px;
+}
+body::-webkit-scrollbar-track{
+    background-color: darkgrey !important;
+}
+body::-webkit-scrollbar-thumb{
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3 );
+ background-color: grey !important;
+ border-radius: 10px;
 }
 
-.navbar-login {
+/* --------------------------------------------------------------------- */
+
+
+    /* ----------------------------------- */
+/* ------------------ spiner----------------- */
+    /* ----------------------------------- */
+    .spiner{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
+    /* --------------*********-------------------- */
+
+/* ---------------------------------------------------------------------- */
+ /* -----------------------------navbar-------------------------------- */
+/* ---------------------------------------------------------------------- */
+.cus-nav {
     display: flex;
-    justify-content: space-between;
-    background-color: #7749f8;
+    justify-content: space-around;
+    background-color: #7749f8 !important;
     height: 40px;
 }
-.navbar-login a{
-    margin-right: 3%;
-    color: #fff;
+.collapse{
+    margin-right: 10% !important;
+    color: black;
 }
+.profile-head{
+    margin-left: 13%;
+    color: #fff !important;
+}
+/* --------------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------------- */
+/* ------------------------------MAIN HEADING---------------------------- */
+/* ---------------------------------------------------------------------- */
 .login-main-heading {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-around; */
     background-color: #fff !important;
-    height: 150px;
+    padding-left: 12%;
+    height: 70px;
 }
+/* ------------------------------***********---------------------------- */
+
 
 .login-main-parent {
-    height: 80vh;
+    height: 60vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -33,17 +80,19 @@ body {
 
 .login-main {
     margin: auto;
-    height: 200px;
-    width: 30%;
+    height: 250px;
+    width: 390px;
     background-color: #fff;
-    border: solid;
+    /* border: solid; */
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
 }
 
 .login-main input {
     height: 40px;
-    width: 50%;
+    width: 60%;
     margin: auto;
     border-radius: 5px;
 }
@@ -53,6 +102,6 @@ body {
     width: 30%;
     margin: auto;
     border-radius: 5px;
-    background-color: #7749f8;
+    background-color: #7749f8 !important;
     border: none;
 }

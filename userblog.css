@@ -19,6 +19,19 @@ body::-webkit-scrollbar-thumb{
  background-color: grey !important;
  border-radius: 10px;
 }
+
+    /* ----------------------------------- */
+/* ------------------ spiner----------------- */
+    /* ----------------------------------- */
+    .spiner{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
+    /* --------------*********-------------------- */
 /* NAVBAR START */
 .navbar-bg{
     background-color:#7749f8 !important;

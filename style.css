@@ -20,6 +20,18 @@ body::-webkit-scrollbar-thumb{
  border-radius: 10px;
 }
 
+    /* ----------------------------------- */
+/* ------------------ spiner----------------- */
+    /* ----------------------------------- */
+    .spiner{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
+    /* --------------*********-------------------- */
 .navbar-login {
     display: flex;
     justify-content: space-around;
@@ -137,4 +149,9 @@ li{
     color: #7749f8;
     border: none;
     margin-left: 2% !important;
+    i
 }
+
+/* @media screen {
+    
+} */

@@ -1,7 +1,7 @@
 
 import {
   getStorage, ref, uploadBytesResumable, getDownloadURL,
-  getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, arrayUnion, getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword
+  getFirestore, collection, addDoc, doc, updateDoc, onSnapshot, arrayUnion, getAuth, reauthenticateWithCredential, EmailAuthProvider, updatePassword ,signOut
 } from "./firebase.js"
 const auth = getAuth();
 const storage = getStorage();
@@ -17,7 +17,8 @@ let updatePasswordBtn = document.getElementById("update-password-btn");
 let updateEmail = document.getElementById("update-email");
 let oldPassword = document.getElementById("old-password");
 let newPassword = document.getElementById("new-password");
-
+let spiner = document.getElementById("spiner");
+// spiner.style.display = "";
 let callUpdatePassword = async() => {
   if (oldPassword.value.trim() == "" ){
     Swal.fire({
@@ -78,40 +79,48 @@ let userUpdatePassword = () => {
 updatePasswordBtn.addEventListener("click", callUpdatePassword)
 
 let logout = () => {
+  console.log("logout")
   signOut(auth).then(() => {
     localStorage.clear()
-    location.href = "./signup.html"
+    location.href = "./allblog.html"
   }).catch((error) => {
     console.log("error")
   });
 }
-logoutBtn.addEventListener("click", logout)
+logoutBtn.addEventListener("click", logout);
+// =================================================//
+// ================icon button function ============//
+// =================================================//
 let iconBtns = () => {
   profileFileImage.click();
+  // console.log(profileFileImage.files[0])
 }
 iconBtn.addEventListener("click", iconBtns)
 let imageupdate = () => {
+  spiner.style.display = "none";
   const unsub = onSnapshot(doc(db, "users", localStorage.getItem("usersId")), (doc) => {
     profileName.innerHTML = doc.data().signup_name_value;
-    profileImage.src = doc.data().photoUrl;
+      
     navProfileName.innerHTML = doc.data().signup_name_value;
+    
     updateEmail.value = doc.data().signup_email_value;
-    console.log("Current data: ", doc.data());
-
+    console.log("Current data: ", doc.data().photoUrl);
+    if (doc.data().photoUrl){
+      profileImage.src = doc.data().photoUrl
+    }
+    
   });
-
+  
 };
 
-imageupdate()
+imageupdate();
 let profileUpdateImage = () => {
-  console.log("hee")
-  console.log(profileFileImage.files[0].name)
-  updateProfile(URL.createObjectURL(profileFileImage.files[0]))
-    .then(async (res) => {
+  console.log(profileFileImage.files[0]) 
+  updateProfile(profileFileImage.files[0])
+  .then(async (res) => {
       console.log(res)
+      
       const washingtonRef = doc(db, "users", localStorage.getItem("usersId"));
-
-      // Set the "capital" field of the city 'DC'
       await updateDoc(washingtonRef, {
         photoUrl: res
       });
@@ -119,17 +128,16 @@ let profileUpdateImage = () => {
     }
     )
     .catch(rep => console.log(rep))
+    
+  }
+  
+  let updateProfile = (file) => {
 
-}
-let updateProfile = (file) => {
-  return new Promise((resolve, reject) => {
-
-    console.log(file.name)
-    const storageRef = ref(storage, `images${file.name}`);
-
-    const uploadTask = uploadBytesResumable(storageRef, file);
-
-    uploadTask.on('state_changed',
+    return new Promise((resolve, reject) => {
+      console.log(file.name)
+      const storageRef = ref(storage, `images${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+       uploadTask.on('state_changed',
       (snapshot) => {
 
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -151,6 +159,7 @@ let updateProfile = (file) => {
 
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('File available at', downloadURL);
+      // profileImage.src = downloadURL;
           resolve(downloadURL)
         });
       }

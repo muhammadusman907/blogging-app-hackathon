@@ -17,6 +17,22 @@
     
 </head>
 
+ <!-- ---------------------------------------- -->
+        <!------------------ spiner ---------------------- -->
+          <!-- ---------------------------------------- -->
+          <div class="spiner" id="spiner">
+            <div class="spinner-grow text-primary ms-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-primary ms-2" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div class="spinner-grow text-primary ms-2" role="status">
+                <span class="visually-hidden ">Loading...</span>
+            </div>
+        </div>
+        <!-- ------------------*******---------------------- -->
+
 <body>
     <nav>
         <div class="navbar-login ">
@@ -41,15 +57,17 @@
 
     <div class="profile-main">
         <div class="profile-main-child">
-            <div class="profile-image"><img id="profile-image" src="images/mypic.jpeg" alt="">
+            <div class="profile-image"><img id="profile-image" src="public/profile.png" alt="">
                 <label for=""></label>
+                
                 <i class="fa-solid fa-pen" id="icon-btn"></i>
+                
                 <input style="display: none;" type="file" id="profile-image-file">
             </div>
             
             <h3 style="margin-left: 10% !important;" class="profile-name" id="profile-name">Muhammad usman</h3>
-           
             <button class="profile-pic-btn" id="profile-image-btn">update image</button>
+           
 
             <div class="profile-email-password-upadate">
                 <input  id="update-email" class="form-control" type="text" placeholder="Enter email">

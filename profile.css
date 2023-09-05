@@ -20,6 +20,21 @@ body::-webkit-scrollbar-thumb{
  background-color: grey !important;
  border-radius: 10px;
 }
+
+
+    /* ----------------------------------- */
+/* ------------------ spiner----------------- */
+    /* ----------------------------------- */
+    .spiner{
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+    }
+    /* --------------*********-------------------- */
+
 .swal-back{
     margin: 10px !important;
     padding: auto !important ;
@@ -67,17 +82,18 @@ body::-webkit-scrollbar-thumb{
 }
 /* PROFILE MAIN */
 .profile-main{
-    border: solid;
+    /* border: solid; */
     height: auto;
     width: 60%;
     margin:  auto !important;
     padding: auto !important;
-    margin-top: 15px;
+    margin-top: 10px !important;
     background-color: #fff !important;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 }
 .profile-main-child{
+
     width: 80%;
     margin: auto !important;
     padding: auto !important;
@@ -93,17 +109,20 @@ body::-webkit-scrollbar-thumb{
     margin-top: 10px;
     border-radius: 10px;
     height: 250px;
+    position: relative;
 }
 .profile-image img{
     border-radius: 10px;
     width: 100%;
-    height: 245px;
-    object-fit:cover;
+    height: 100%;
+    /* object-fit:cover; */
 }
+
 .profile-image i{
+    /* border: solid; */
     position: absolute;
-    top: 52%;
-    left:46%;
+    bottom: 6%;
+    right:10%;
     color: #7749f8;
     cursor: pointer;
      font-size: 30px;
@@ -151,5 +170,7 @@ margin-top: 10px !important;
     border: none;
     background-color: transparent;
     color: #fff;
+    cursor: pointer;
+
     /* margin-left: 2% !important ; */
 }

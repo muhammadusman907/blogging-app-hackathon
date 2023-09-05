@@ -3,6 +3,7 @@ let singleUserList = document.getElementById("single-user-list")
 let userProfileEmail = document.getElementById("single-user-email")
 let userProfileName = document.getElementById("single-user-name")
 let userProfilePhoto = document.getElementById("user-profile-photo")
+let spiner = document.getElementById("spiner");
 const db = getFirestore();
 export{singleUser}
 let singleUser = (e) =>{
@@ -16,6 +17,7 @@ let singleUser = (e) =>{
 const singleUsergetData = ()=>{
     if (location.pathname == "/userblog.html"){ const q = query(collection(db, "blogs"), where("currentuserid", "==", localStorage.getItem("profileId")));
     const unsubscribe = onSnapshot(q, (snapshot) => {
+        spiner.style.display = "none";
         snapshot.docChanges().forEach((change) => {
             userProfilePhoto.src = change.doc.data().imageUrl;
             userProfileEmail.innerHTML = change.doc.data().userEmail;
